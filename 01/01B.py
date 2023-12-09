@@ -10,22 +10,53 @@ numbers = {
     "nine": "9",
     }
 
+def find_last_digit_word(segment):
+    for i in range(-1, -len(segment)-1, -1):
+        if segment[i].isdigit():
+            print(segment[i])
+            return segment[i]
+        for n_string, n_number in numbers.items():
+            k = i
+            match = True
+            for n_char in n_string:
+                if k >= 0:
+                    match = False
+                    break
+                if n_char != segment[k]:
+                    match = False
+                    break
+                k += 1
+            if match:
+                print(n_number)
+                return n_number
+
+
+def find_first_digit_word(segment):
+    for i in range(len(segment)):
+        if segment[i].isdigit():
+            return segment[i]
+        for n_string, n_number in numbers.items():
+            k = i
+            match = True
+            for n_char in n_string:
+                if k >= len(segment):
+                    match = False
+                    break
+                if n_char != segment[k]:
+                    match = False
+                    break
+                k += 1
+            if match:
+                return n_number
+
 with open("01/input.txt.", "r") as f:
     sum = 0
     for line in f:
-        for n_string, n_integer in numbers.items():
-            line = line.replace(n_string, n_integer)
-
-        number = ""
-        for char in line:
-            if char.isdigit():
-                number += char
-                break
-        for char in reversed(line):
-            if char.isdigit():
-                number += char
-                break
+        line = line.rstrip('\n')
+        print(line)
+        number = find_first_digit_word(line)
+        number += find_last_digit_word(line)
+        # print(number)
         number = int(number)
-        print(number)
         sum += number
     print(sum)
