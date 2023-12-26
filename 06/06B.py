@@ -1,11 +1,13 @@
 import math
 
+
 def process_input(lines):
     time_list = lines[0].split(":")[1].replace(" ", "")
     time = int(time_list)
     distance_list = lines[1].split(":")[1].replace(" ", "")
     distance = int(distance_list)
     return (time, distance)
+
 
 def main():
     with open("06/input.txt", "r") as f:
